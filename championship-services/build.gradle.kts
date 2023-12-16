@@ -18,8 +18,10 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+  	implementation("org.springframework.boot:spring-boot-starter-web")
+  	runtimeOnly("com.mysql:mysql-connector-j")
+  	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<Test> {
