@@ -1,4 +1,4 @@
-package com.championship.championshipservices.service;
+package com.championship.championshipservices.services;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;

@@ -2,6 +2,7 @@ package com.championship.championshipservices.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,23 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.championship.championshipservices.model.Team;
-import com.championship.championshipservices.service.TeamService;
+import com.championship.championshipservices.services.TeamService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Championship", description = "the Championship Api")
+@Tag(name = "API", description = "all the services related to the rugby championship")
 @RestController
-@RequestMapping("/championship/v1")
-public class ChampionshipController {
+@RequestMapping("/api/v1")
+public class ServiceController {
 
+    @Autowired
     private TeamService teamService;
-
-    public ChampionshipController(TeamService teamService) {
-        this.teamService = teamService;
-    }
 
     @Operation(
         summary = "Fetch all teams", 
@@ -35,6 +33,11 @@ public class ChampionshipController {
     })
     @GetMapping(value = "/teams", produces = "application/json")
     public ResponseEntity<List<Team>> getAllTeams(){
-        return new ResponseEntity<List<Team>>(teamService.getTeams(), HttpStatus.OK); 
-    }
+        try{
+            List<Team> teams = teamService.getTeams();
+            return new ResponseEntity<List<Team>>(teams,HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); 
+        }
+    }   
 }

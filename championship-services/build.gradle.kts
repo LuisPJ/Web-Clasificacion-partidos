@@ -24,6 +24,7 @@ dependencies {
   	runtimeOnly("com.mysql:mysql-connector-j")
   	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+	developmentOnly ("org.springframework.boot:spring-boot-devtools")
 }
 /* 
 tasks.withType<Test> {
