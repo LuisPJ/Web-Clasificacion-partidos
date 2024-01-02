@@ -25,8 +25,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-rest")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter")
-	implementation("io.springfox:springfox-swagger2:3.0.0")
-	implementation("io.springfox:springfox-swagger-ui:3.0.0")
 	implementation("mysql:mysql-connector-java:8.0.28")
 	implementation("javax.persistence:javax.persistence-api:2.2")
 	compileOnly ("org.projectlombok:lombok")
@@ -36,6 +34,7 @@ dependencies {
 	testImplementation ("org.junit.jupiter:junit-jupiter-api:5.8.2")
 	testImplementation ("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 	testImplementation ("org.mockito:mockito-core:3.12.4")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 }
 
 tasks.withType<Test> {

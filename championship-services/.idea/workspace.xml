@@ -5,16 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="900fd218-0c31-4b99-8474-f4db1da1c634" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/SwaggerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/controller/ServiceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/model/Administrator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/repository/LoginRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/services/LoginServices.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/model/Teams.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/repository/RegisterRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/ChampionshipServicesApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/ChampionshipServicesApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/SwaggerConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/controller/ServiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/controller/ServiceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/services/LoginServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/championship/championshipservices/services/LoginServices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/championship/championshipservices/ChampionshipServicesApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/championship/championshipservices/ChampionshipServicesApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +42,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -63,16 +61,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature/list-teams",
-    "last_opened_file_path": "D:/PROYECTOS/Web-Clasificacion-partidos/championship-services"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/admin-login&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/PROYECTOS/Web-Clasificacion-partidos/championship-services&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.ChampionshipServicesApplication">
     <configuration name="ChampionshipServicesApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.championship.championshipservices.ChampionshipServicesApplication" />
       <module name="championship-services.main" />
       <extension name="coverage">
@@ -107,6 +107,10 @@
       <RunAsTest>true</RunAsTest>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.ChampionshipServicesApplication" />
+      <item itemvalue="Gradle.Tests in 'championship-services.test'" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.Tests in 'championship-services.test'" />
