@@ -3,13 +3,11 @@ package com.championship.championshipservices.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "equipos")
 public class Teams {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
-
-    public String nombreDelEquipo;
+    public String nombreDeEquipo;
     public int numeroDePartidosJugados;
     public int numeroVictorias;
     public int numeroDerrotas;
@@ -24,12 +22,12 @@ public class Teams {
         this.id = id;
     }
 
-    public String getNombreDelEquipo() {
-        return nombreDelEquipo;
+    public String getNombreDeEquipo() {
+        return nombreDeEquipo;
     }
 
-    public void setNombreDelEquipo(String nombreDelEquipo) {
-        this.nombreDelEquipo = nombreDelEquipo;
+    public void setNombreDeEquipo(String nombreDeEquipo) {
+        this.nombreDeEquipo = nombreDeEquipo;
     }
 
     public int getNumeroDePartidosJugados() {
@@ -76,7 +74,7 @@ public class Teams {
     public String toString() {
         return "Teams{" +
                 "id=" + id +
-                ", nombreDelEquipo='" + nombreDelEquipo + '\'' +
+                ", nombreDeEquipo='" + nombreDeEquipo + '\'' +
                 ", numeroDePartidosJugados=" + numeroDePartidosJugados +
                 ", numeroVictorias=" + numeroVictorias +
                 ", numeroDerrotas=" + numeroDerrotas +
