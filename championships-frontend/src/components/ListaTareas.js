@@ -11,7 +11,7 @@ const ListaTareas = ({onSubmit}) => {
     }
 
     return(
-        <>
+        <div>
             <h3 className="mb-3">Registrar nuevo equipo</h3>
             <AvForm ref = {c => (form = c)} onValidSubmit={(_,values) => _onSubmit(values)}>
                 <AvGroup className="mb-3">
@@ -21,7 +21,7 @@ const ListaTareas = ({onSubmit}) => {
                     <Button color="primary">Guardar</Button>
                 </div>
             </AvForm>
-        </>
+        </div>
     );
 }
 

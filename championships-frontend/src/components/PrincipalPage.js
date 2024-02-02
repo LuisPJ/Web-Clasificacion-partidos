@@ -2,8 +2,9 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav } from 'react-bootstrap';
 import { BrowserRouter , Route,  Routes } from 'react-router-dom';
-import AdminLogin from '../AdminLogin/AdminLogin';
+import AdminLogin from '../components/AdminLogin';
 import { useState, useEffect } from 'react';
+import Intermediate from './Intermediate';
 
 
 const TeamTable = () => {
@@ -65,6 +66,7 @@ const PrincipalPage = () => {
         <Routes> 
         <Route path="/AdminLogin" element={<AdminLogin/>} />
          <Route path="/home" element={<TeamTable/>} />  
+         <Route path="/Intermediate" element={<Intermediate/>} />  
         </Routes>
      
       </BrowserRouter>
