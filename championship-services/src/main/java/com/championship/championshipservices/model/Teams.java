@@ -1,6 +1,7 @@
 package com.championship.championshipservices.model;
 
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Teams {
