@@ -1,11 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Nav } from 'react-bootstrap';
-import { BrowserRouter , Route,  Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import AdminLogin from '../components/AdminLogin';
-import { useState, useEffect } from 'react';
-import Intermediate from './Intermediate';
-
+import { useState, useEffect, useRef } from 'react';
+import CustomNavbar from './CustomNavbar';
+import RegisterGame from './RegisterGame';
+import ListaTareas from './ListaTareas';
+import NoLoggedRoute from './NoLoggedRoute';
+import LoggedRoute from './LoggedRoute';
 
 const TeamTable = () => {
   const [teams, setTeams] = useState([]);
@@ -52,28 +54,25 @@ const TeamTable = () => {
 };
 
 const PrincipalPage = () => {
-    return (
-      
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    return ( 
       <div>
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand>Championship</Navbar.Brand>
-          <Nav className="ml-auto">
-            <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/AdminLogin">Login</Nav.Link>
-          </Nav>
-        </Navbar>
-      <BrowserRouter> 
-        <Routes> 
-        <Route path="/AdminLogin" element={<AdminLogin/>} />
-         <Route path="/home" element={<TeamTable/>} />  
-         <Route path="/Intermediate" element={<Intermediate/>} />  
+        <CustomNavbar/>
+        <Routes>
+            <Route path="" element={<TeamTable/>}/>
+            <Route element={<NoLoggedRoute isLoggedIn={isLoggedIn}/>}>
+              <Route path="AdminLogin" element={<AdminLogin/>}/> 
+            </Route>
+
+            <Route element={<LoggedRoute isLoggedIn={isLoggedIn}/>}>
+              <Route path="RegisterGame" element={<RegisterGame/>} />
+              <Route path="ListaTareas"  element={<ListaTareas/>} />
+            </Route>
         </Routes>
-     
-      </BrowserRouter>
-       </div>
-   
-  );
+      </div>
+    );
   };
-  
   export default PrincipalPage;
   

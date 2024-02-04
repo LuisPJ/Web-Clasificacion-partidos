@@ -7,7 +7,9 @@ const AdminLogin = () => {
     const [password, setPassword] = useState('');
     const navigate=useNavigate();
 
-    const handleLogin = async () => {
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
         try {
             const url = new URL('http://localhost:8080/api/v1/login');
             url.searchParams.append('email', email);
@@ -20,14 +22,15 @@ const AdminLogin = () => {
               },
             });
 
-            const responseData = await response.text();
+            //const responseData = await response.text();
 
-            window.alert(responseData);
+            //window.alert(responseData);
       
             if (response.ok) {
               // Successful login, you can perform further actions here
-              console.log('Login successful');
-              navigate("/Intermediate");
+              //console.log('Login successful');
+              localStorage.setItem("isLoggedIn", "true");
+              navigate("/RegisterGame", {replace: true});
             } else {
               // Handle error cases (401, 403, 404, etc.)
               window.alert("Incorrect user or password.");
