@@ -1,9 +1,9 @@
 package com.championship.championshipservices.services;
 
 import com.championship.championshipservices.model.Administrator;
-import com.championship.championshipservices.model.Teams;
+import com.championship.championshipservices.model.Team;
 import com.championship.championshipservices.repository.LoginRepository;
-import com.championship.championshipservices.repository.RegisterRepository;
+import com.championship.championshipservices.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class LoginServices {
     @Autowired
     private LoginRepository loginRepository;
     @Autowired
-    private RegisterRepository registerRepository;
+    private TeamRepository teamRepository;
 
     public ResponseEntity<String> loginUser(Administrator admin) {
         try {
@@ -31,17 +31,20 @@ public class LoginServices {
         }
     }
 
-    public ResponseEntity<String> registerTeam(Teams teams) {
+    public ResponseEntity<String> registerTeam(Team team) {
         try {
-            registerRepository.save(teams);
+            teamRepository.save(team);
             return ResponseEntity.status(HttpStatus.OK).body("Registro exitoso");
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error de servidor");
         }
     }
 
-    public ResponseEntity<String> registerGame(Teams team1, Teams team2, String result) {
+    public ResponseEntity<String> registerGame(Team team1, Team team2, String result) {
         try {
+            team1 = teamRepository.findById(team1.getIdTeam()).get();
+            team2 = teamRepository.findById(team2.getIdTeam()).get();
+
             if(result.equals("VICTORIA")){
                 team1.setNumeroDePartidosJugados(team1.getNumeroDePartidosJugados()+1);
                 team1.setNumeroVictorias(team1.getNumeroVictorias()+1);
@@ -62,8 +65,8 @@ public class LoginServices {
                 team1.setNumeroEmpates(team1.getNumeroEmpates()+1);
                 team2.setNumeroEmpates(team2.getNumeroEmpates()+1);
             }
-            registerRepository.save(team1);
-            registerRepository.save(team2);
+            teamRepository.save(team1);
+            teamRepository.save(team2);
             return ResponseEntity.status(HttpStatus.OK).body("Registro exitoso");
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error de servidor");

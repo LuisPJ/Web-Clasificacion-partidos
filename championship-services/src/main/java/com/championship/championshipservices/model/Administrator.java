@@ -1,5 +1,6 @@
 package com.championship.championshipservices.model;
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "administrador")
@@ -9,6 +10,12 @@ public class Administrator {
     public int id;
     public String email;
     public String password;
+
+    public Administrator(String mail, String password) {
+    }
+
+    public Administrator() {
+    }
 
     public int getId() {
         return id;
