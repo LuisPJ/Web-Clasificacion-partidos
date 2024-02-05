@@ -96,6 +96,8 @@ class ChampionshipServicesApplicationTests {
                                                 new Sort.Order(Sort.Direction.DESC, "puntos"),
                                                 new Sort.Order(Sort.Direction.ASC, "nombreEquipo"))));
 
+        }
+
 	@Mock
 	private LoginRepository loginRepository;
 

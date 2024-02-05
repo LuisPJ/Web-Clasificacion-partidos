@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import com.championship.championshipservices.model.Team;
 import com.championship.championshipservices.services.TeamService;
-
+import com.championship.championshipservices.DTO.GameDTO;
 import com.championship.championshipservices.model.Administrator;
-import com.championship.championshipservices.model.Teams;
 import com.championship.championshipservices.services.LoginServices;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -44,8 +43,8 @@ public class ServiceController {
     })
     @GetMapping("/login")
     public ResponseEntity<String> loginUser(
-        @RequestParam String email,
-        @RequestParam String password
+        @RequestParam(name = "email") String email,
+        @RequestParam(name = "password") String password
     ) {
         Administrator admin = new Administrator();
         admin.setEmail(email);
@@ -54,13 +53,13 @@ public class ServiceController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody Teams teams) {
+    public ResponseEntity<String> registerUser(@RequestBody Team teams) {
         return championService.registerTeam(teams);
     }
 
     @PostMapping("/register-game")
-    public ResponseEntity<String> registerGame(@RequestBody Teams team1, Teams team2, String result) {
-        return championService.registerGame(team1, team2, result);
+    public ResponseEntity<String> registerGame(@RequestBody GameDTO gameDto) {
+        return championService.registerGame(gameDto.getTeam1(), gameDto.getTeam2(), gameDto.getResult());
     }
   
   @Operation(
