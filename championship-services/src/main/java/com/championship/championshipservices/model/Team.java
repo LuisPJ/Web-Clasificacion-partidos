@@ -50,6 +50,9 @@ public class Team implements Serializable{
         this.puntos = puntos;
     }
 
+    public Team(String team, int i) {
+    }
+
     public int getIdTeam() {
         return idTeam;
     }
