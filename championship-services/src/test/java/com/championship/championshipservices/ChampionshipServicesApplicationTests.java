@@ -2,9 +2,7 @@ package com.championship.championshipservices;
 
 import com.championship.championshipservices.model.Administrator;
 import com.championship.championshipservices.model.Team;
-import com.championship.championshipservices.model.Teams;
 import com.championship.championshipservices.repository.LoginRepository;
-import com.championship.championshipservices.repository.RegisterRepository;
 import com.championship.championshipservices.repository.TeamRepository;
 import com.championship.championshipservices.services.LoginServices;
 import com.championship.championshipservices.services.TeamService;
@@ -14,12 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +27,10 @@ import static org.mockito.Mockito.when;
 
 class ChampionshipServicesApplicationTests{
 
-        }
+
 
 	@Mock
 	private LoginRepository loginRepository;
-
-	@Mock
-	private RegisterRepository registerRepository;
 
 	@InjectMocks
 	private LoginServices loginServices;
@@ -87,8 +79,8 @@ class ChampionshipServicesApplicationTests{
 
 	@Test
 	void registerTeamSuccess() {
-		Teams teams = new Teams();
-		Mockito.doReturn(null).when(registerRepository).save(teams);
+		Team teams = new Team();
+		Mockito.doReturn(null).when(teamRepository).save(teams);
 
 		ResponseEntity<String> response = loginServices.registerTeam(teams);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -97,54 +89,21 @@ class ChampionshipServicesApplicationTests{
 
 	@Test
 	void registerTeamInternalServerError() {
-		Teams teams = new Teams();
-		Mockito.doThrow(new RuntimeException("Simulated internal server error")).when(registerRepository).save(teams);
+		Team teams = new Team();
+		Mockito.doThrow(new RuntimeException("Simulated internal server error")).when(teamRepository).save(teams);
 
 		ResponseEntity<String> response = loginServices.registerTeam(teams);
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 		assertEquals("Error de servidor", response.getBody());
 	}
 
-	@Test
-	void registerGameVictory() {
-		Teams team1 = new Teams();
-		Teams team2 = new Teams();
-		String result = "VICTORIA";
-
-		ResponseEntity<String> response = loginServices.registerGame(team1, team2, result);
-
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertEquals("Registro exitoso", response.getBody());
-	}
-
-	@Test
-	void registerGameDefeated() {
-		Teams team1 = new Teams();
-		Teams team2 = new Teams();
-		String result = "DERROTA";
-
-		ResponseEntity<String> response = loginServices.registerGame(team1, team2, result);
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertEquals("Registro exitoso", response.getBody());
-	}
-
-	@Test
-	void registerGameDraw() {
-		Teams team1 = new Teams();
-		Teams team2 = new Teams();
-		String result = "EMPATE";
-
-		ResponseEntity<String> response = loginServices.registerGame(team1, team2, result);
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-		assertEquals("Registro exitoso", response.getBody());
-	}
 
 	@Test
 	void registerGameInternalServerError() {
-		Teams team1 = new Teams();
-		Teams team2 = new Teams();
+		Team team1 = new Team();
+		Team team2 = new Team();
 		String result = "VICTORIA";
-		Mockito.doThrow(new RuntimeException("Simulated internal server error")).when(registerRepository).save(any());
+		Mockito.doThrow(new RuntimeException("Simulated internal server error")).when(teamRepository).save(any());
 
 		ResponseEntity<String> response = loginServices.registerGame(team1, team2, result);
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());

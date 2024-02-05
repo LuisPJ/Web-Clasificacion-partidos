@@ -11,6 +11,12 @@ public class Administrator {
     public String email;
     public String password;
 
+    public Administrator(String mail, String password) {
+    }
+
+    public Administrator() {
+    }
+
     public int getId() {
         return id;
     }
