@@ -1,44 +1,58 @@
-// RegisterGame.js
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState} from 'react';
 import axios from 'axios';
 import { Button, Dropdown, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const RegisterGame = () => {
-    const [options, setOptions] = useState(["monkeys", "5", "4", "3", "1", "2"]);
+    const [teams, setTeams] = useState([]);
+    const [options, setOptions] = useState([]);
     const [team1, setTeam1] = useState(null);
     const [team2, setTeam2] = useState(null);
-    const [resultOptions, setResultOption] = useState(["VICTORIA","DERROTA","EMPATE"]);
+    const [resultOptions] = useState(["VICTORIA","DERROTA","EMPATE"]);
     const [selectedResult,setSelectedResult]= useState(null);
+
     const handleSave= async () => {
-        try {
-          // Your data to be sent in the request body
-          const postData = {
-            // Add your data properties here
-            title: 'Example Title',
-            content: 'Example Content',
-          };
-    
-          // Make a POST request using Axios
-          const response = await axios.post('YOUR_API_ENDPOINT', postData);
-          
-          // Handle the response as needed
-          console.log('Response:', response.data);
-    
-          // Optionally, you can perform additional actions after a successful save
-        } catch (error) {
-          // Handle errors
-          console.error('Error saving data:', error.message);
+
+        if(team1 === team2){
+          window.alert("Select 2 different teams");
+        }else if (selectedResult == null){
+          window.alert("Select a result");
+        }else{ 
+          try {
+            
+            // Your data to be sent in the request body
+            const postData = {
+              // Add your data properties here
+              team1: teams.find((option)=> option.nombreEquipo === team1),
+              team2: teams.find((option)=> option.nombreEquipo === team2),
+              result: selectedResult
+            };
+      
+            // Make a POST request using Axios
+            const response = await axios.post('http://localhost:8080/api/v1/register-game', postData);
+            
+            // Handle the response as needed
+            console.log('Response:', response.data);
+      
+            window.alert("Game saved successfully!");
+            
+            // Optionally, you can perform additional actions after a successful save
+          } catch (error) {
+            // Handle errors
+            console.error('Error saving data:', error.message);
+          }
         }
       };
     
-    /*useEffect(() => {
+    useEffect(() => {
       // Fetch data from the backend
       const fetchData = async () => {
         try {
-          const response = await axios.get('YOUR_BACKEND_ENDPOINT'); // Replace with your actual backend endpoint
-          setOptions(response.data);
+          const response = await axios.get('http://localhost:8080/api/v1/teams'); // Replace with your actual backend endpoint
+          setTeams(response.data);
+          setOptions(response.data.map((team)=>{return team.nombreEquipo;}));
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -46,7 +60,7 @@ const RegisterGame = () => {
   
       fetchData();
     }, []); // Empty dependency array means this effect will run once when the component mounts
-  */
+  
     const handleSelectTeam1 = (selectedValue) => {
         setTeam1(selectedValue);
         // You can perform additional actions on selection if needed
@@ -63,7 +77,7 @@ const RegisterGame = () => {
     return (
         <div
       className="modal show"
-      style={{ display: 'block', /*position: 'initial'*/ }}
+      style={{ display: 'block', margin: '50px'/*position: 'initial'*/ }}
     >
       <Modal.Dialog>
         <Modal.Header closeButton>

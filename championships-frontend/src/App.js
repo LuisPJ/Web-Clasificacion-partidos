@@ -1,15 +1,14 @@
-
+import React from 'react';
 import './App.css';
-import PrincipalPage from './PrincipalPage/PrincipalPage';
-
+import PrincipalPage from './components/PrincipalPage';
 
 function App() {
+
   return (
-    <div className="App">
-       <PrincipalPage/>
-      
+    <div>
+        <PrincipalPage/>
     </div>
-  );
+    );
 }
 
 export default App;
