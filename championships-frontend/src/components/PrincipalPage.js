@@ -6,7 +6,6 @@ import { useState, useEffect, useRef } from 'react';
 import CustomNavbar from './CustomNavbar';
 import RegisterGame from './RegisterGame';
 import ListaTareas from './ListaTareas';
-import NoLoggedRoute from './NoLoggedRoute';
 import LoggedRoute from './LoggedRoute';
 
 const TeamTable = () => {
@@ -62,11 +61,11 @@ const PrincipalPage = () => {
         <CustomNavbar/>
         <Routes>
             <Route path="" element={<TeamTable/>}/>
-            <Route element={<NoLoggedRoute isLoggedIn={isLoggedIn}/>}>
+            <Route element={<LoggedRoute flag="false"/>}>
               <Route path="AdminLogin" element={<AdminLogin/>}/> 
             </Route>
 
-            <Route element={<LoggedRoute isLoggedIn={isLoggedIn}/>}>
+            <Route element={<LoggedRoute flag="true"/>}>
               <Route path="RegisterGame" element={<RegisterGame/>} />
               <Route path="ListaTareas"  element={<ListaTareas/>} />
             </Route>
