@@ -14,7 +14,9 @@ const CustomNavbar = () => {
     return (
         <div>
         <BootstrapNavbar bg="dark" variant="dark">
-          <BootstrapNavbar.Brand>Championship</BootstrapNavbar.Brand>
+          <div style={{marginLeft : "15px"}}>
+              <BootstrapNavbar.Brand>Championship</BootstrapNavbar.Brand>
+          </div>
           <Nav className="ml-auto">
             <Nav.Link href="/">Home</Nav.Link>
             {
