@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
+import CustomErrorMessage from './CustomErrorMessage';
 
 const AdminLogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate=useNavigate();
 
     const handleLogin = async (e) => {
@@ -33,7 +36,8 @@ const AdminLogin = () => {
               navigate("/RegisterGame", {replace: true});
             } else {
               // Handle error cases (401, 403, 404, etc.)
-              window.alert("Incorrect user or password.");
+              setErrorMessage("Incorrect email or password.");
+              setShowErrorMessage(true);
               console.error('Login failed');
             }
           } catch (error) {
@@ -52,6 +56,10 @@ const AdminLogin = () => {
           <div className="card">
             <div style={cardHeaderStyle} className="card-header">ADMIN LOGIN</div>
             <div className="card-body">
+              
+              <CustomErrorMessage show={showErrorMessage} title='Login Error' 
+                message={errorMessage} onCloseError={()=>{setShowErrorMessage(false)}}/>
+
               <form>
                 <div className="mb-3">
                   <label htmlFor="inputEmail" className="form-label">
