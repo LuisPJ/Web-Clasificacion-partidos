@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Button, Dropdown, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
+import CustomErrorMessage from './CustomErrorMessage';
 
 
 const RegisterGame = () => {
@@ -12,13 +13,17 @@ const RegisterGame = () => {
     const [team2, setTeam2] = useState(null);
     const [resultOptions] = useState(["VICTORIA","DERROTA","EMPATE"]);
     const [selectedResult,setSelectedResult]= useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
 
     const handleSave= async () => {
 
-        if(team1 === team2){
-          window.alert("Select 2 different teams");
+        if(team1 === team2 || team1 == null || team2 == null){
+          setErrorMessage("Select 2 different teams");
+          setShowErrorMessage(true);
         }else if (selectedResult == null){
-          window.alert("Select a result");
+          setErrorMessage("Select a result");
+          setShowErrorMessage(true);
         }else{ 
           try {
             
@@ -36,6 +41,7 @@ const RegisterGame = () => {
             // Handle the response as needed
             console.log('Response:', response.data);
       
+            setShowErrorMessage(false);
             window.alert("Game saved successfully!");
             
             // Optionally, you can perform additional actions after a successful save
@@ -85,6 +91,8 @@ const RegisterGame = () => {
         </Modal.Header>
 
         <Modal.Body>
+          <CustomErrorMessage show={showErrorMessage} title='Invalid Input' 
+            message={errorMessage} onCloseError={()=>{setShowErrorMessage(false)}}/>
         <div /*className="row"*/ style={{display:"flex"}}>
             <div /*className='col-md-6'*/>
                 <Dropdown onSelect={handleSelectTeam1} style={{margin:'5px'}}>
