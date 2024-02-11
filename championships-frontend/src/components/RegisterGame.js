@@ -86,7 +86,7 @@ const RegisterGame = () => {
       style={{ display: 'block', margin: '50px'/*position: 'initial'*/ }}
     >
       <Modal.Dialog>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Register Game</Modal.Title>
         </Modal.Header>
 
