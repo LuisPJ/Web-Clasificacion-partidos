@@ -133,4 +133,54 @@ class ChampionshipServicesApplicationTests{
 		mockTeams.forEach(team -> System.out.println("Nombre: " + team.getNombreEquipo() + ", Puntos: " + team.getPuntos()));
 	}
 
+
+
+	@Test
+	public void testRegisterGameVictoria() {
+		Team team1 = new Team();
+		Team team2 = new Team();
+		team1.setIdTeam(1);
+		team2.setIdTeam(2);
+
+		when(teamRepository.findById(1)).thenReturn(java.util.Optional.of(team1));
+		when(teamRepository.findById(2)).thenReturn(java.util.Optional.of(team2));
+
+		ResponseEntity<String> responseEntity = loginServices.registerGame(team1, team2, "VICTORIA");
+
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+		assertEquals("Registro exitoso", responseEntity.getBody());
+	}
+
+	@Test
+	public void testRegisterGameDraw() {
+		Team team1 = new Team();
+		Team team2 = new Team();
+		team1.setIdTeam(1);
+		team2.setIdTeam(2);
+
+		when(teamRepository.findById(1)).thenReturn(java.util.Optional.of(team1));
+		when(teamRepository.findById(2)).thenReturn(java.util.Optional.of(team2));
+
+		ResponseEntity<String> responseEntity = loginServices.registerGame(team1, team2, "DERROTA");
+
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+		assertEquals("Registro exitoso", responseEntity.getBody());
+	}
+
+	@Test
+	public void testRegisterGameLose() {
+		Team team1 = new Team();
+		Team team2 = new Team();
+		team1.setIdTeam(1);
+		team2.setIdTeam(2);
+
+		when(teamRepository.findById(1)).thenReturn(java.util.Optional.of(team1));
+		when(teamRepository.findById(2)).thenReturn(java.util.Optional.of(team2));
+
+		ResponseEntity<String> responseEntity = loginServices.registerGame(team1, team2, "EMPATE");
+
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+		assertEquals("Registro exitoso", responseEntity.getBody());
+	}
+
 }
