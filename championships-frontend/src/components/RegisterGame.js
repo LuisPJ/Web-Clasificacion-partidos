@@ -2,7 +2,7 @@ import React, { useEffect, useState} from 'react';
 import axios from 'axios';
 import { Button, Dropdown, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
+import './RegisterGame.css';
 
 
 const RegisterGame = () => {
@@ -12,6 +12,7 @@ const RegisterGame = () => {
     const [team2, setTeam2] = useState(null);
     const [resultOptions] = useState(["VICTORIA","DERROTA","EMPATE"]);
     const [selectedResult,setSelectedResult]= useState(null);
+    const [isDropDownTeam1Open, setIsDropDownTeam1Open] = useState(false);
 
     const handleSave= async () => {
 
@@ -74,70 +75,75 @@ const RegisterGame = () => {
         // You can perform additional actions on selection if needed
     };
 
+    const handleDropdownTeam1Toggle = () => {
+      setIsDropDownTeam1Open(!isDropDownTeam1Open);
+    };
+
+    const handleDropdownTeam1Close = () => {
+      setIsDropDownTeam1Open(false);
+    };
+
     return (
-        <div
-      className="modal show"
-      style={{ display: 'block', margin: '50px'/*position: 'initial'*/ }}
-    >
-      <Modal.Dialog>
-        <Modal.Header closeButton>
-          <Modal.Title>Register Game</Modal.Title>
-        </Modal.Header>
+      <div className="centeredDiv">
 
-        <Modal.Body>
-        <div /*className="row"*/ style={{display:"flex"}}>
-            <div /*className='col-md-6'*/>
-                <Dropdown onSelect={handleSelectTeam1} style={{margin:'5px'}}>
-                    <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                        {team1 ? team1 : 'Select team'}
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        {options.map((option, index) => (
-                            <Dropdown.Item key={index} eventKey={option}>
-                                {option}
-                            </Dropdown.Item>
-                        ))}
-                    </Dropdown.Menu>
-                </Dropdown>
-
-            </div>
-            <div /*className='col-md-6'*/>
-            <Dropdown onSelect={handleSelectTeam2} style={{margin:'5px'}}>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                    {team2 ? team2 : 'Select team'}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    {options.map((option, index) => (
-                        <Dropdown.Item key={index} eventKey={option}>
-                            {option}
-                        </Dropdown.Item>
-                    ))}
-                </Dropdown.Menu>
-            </Dropdown>
-            </div>
-            <div /*className='col-md-6'*/>
-            <Dropdown onSelect={handleSelectResult} style={{margin:'5px'}}>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                    {selectedResult ? selectedResult : 'select result'}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    {resultOptions.map((option, index) => (
-                        <Dropdown.Item key={index} eventKey={option}>
-                            {option}
-                        </Dropdown.Item>
-                    ))}
-                </Dropdown.Menu>
-            </Dropdown>
-            </div>
-            <Button variant='outline-success' onClick={handleSave}>Save</Button>
+        <div>
+          <h4>Register Game</h4>
         </div>
-        </Modal.Body>
-      </Modal.Dialog>
-    </div>
+      
+        <div className="line"/>
+
+        <div style={{display:"flex"}}>
         
+          <Dropdown show={isDropDownTeam1Open} onToggle={handleDropdownTeam1Toggle}
+            onSelect={handleSelectTeam1} style={{margin:'5px'}}>
+
+              <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                  {team1 ? team1 : 'Select team'}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu  style={{ maxHeight: '200px', overflowY: 'scroll' }} onBlur={handleDropdownTeam1Close}>
+                  {options.map((option, index) => (
+                      <Dropdown.Item key={index} eventKey={option}>
+                          {option}
+                      </Dropdown.Item>
+                  ))}
+              </Dropdown.Menu>
+          </Dropdown>
+
+
+          <Dropdown onSelect={handleSelectTeam2} style={{margin:'5px'}}>
+              <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                  {team2 ? team2 : 'Select team'}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu style={{ maxHeight: '200px', overflowY: 'scroll' }} >
+                  {options.map((option, index) => (
+                      <Dropdown.Item key={index} eventKey={option}>
+                          {option}
+                      </Dropdown.Item>
+                  ))}
+              </Dropdown.Menu>
+          </Dropdown>
+          
+          <Dropdown onSelect={handleSelectResult} style={{margin:'5px'}}>
+              <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                  {selectedResult ? selectedResult : 'select result'}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                  {resultOptions.map((option, index) => (
+                      <Dropdown.Item key={index} eventKey={option}>
+                          {option}
+                      </Dropdown.Item>
+                  ))}
+              </Dropdown.Menu>
+          </Dropdown>
+          
+          <Button variant='outline-success' onClick={handleSave}>Save</Button>
+          
+        </div>
+        
+      </div>
     );
 };
 
