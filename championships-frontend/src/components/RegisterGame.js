@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import axios from 'axios';
-import { Button, Dropdown, Modal } from 'react-bootstrap';
+import { Button, Dropdown, Modal, Toast, ToastContainer } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './RegisterGame.css';
 import CustomErrorMessage from './CustomErrorMessage';
@@ -16,6 +16,7 @@ const RegisterGame = () => {
     const [isDropDownTeam1Open, setIsDropDownTeam1Open] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [showErrorMessage, setShowErrorMessage] = useState(false);
+    const [showToast, setShowToast] = useState(false);
 
     const handleSave= async () => {
 
@@ -43,7 +44,11 @@ const RegisterGame = () => {
             console.log('Response:', response.data);
       
             setShowErrorMessage(false);
-            window.alert("Game saved successfully!");
+            setShowToast(true);
+
+            setTeam1(null);
+            setTeam2(null);
+            setSelectedResult(null);
             
             // Optionally, you can perform additional actions after a successful save
           } catch (error) {
@@ -90,6 +95,7 @@ const RegisterGame = () => {
     };
 
     return (
+      <div>
       <div className="centeredDiv">
 
         <div>
@@ -154,6 +160,25 @@ const RegisterGame = () => {
           </div>
           
         </div>
+       
+
+      <ToastContainer
+          className="p-3"
+          position={'middle-center'}
+          style={{ zIndex: 1 }}
+        >
+          <Toast onClose={() => setShowToast(false)} show={showToast} delay={2000} autohide
+            className="d-inline-block m-1"
+            bg={'success'}
+          >
+            <Toast.Header>
+              <strong className="me-auto">Register Game</strong>
+            </Toast.Header>
+            <Toast.Body>Game saved successfully!</Toast.Body>
+          </Toast>
+        </ToastContainer>
+    </div>
+        
     );
 };
 
